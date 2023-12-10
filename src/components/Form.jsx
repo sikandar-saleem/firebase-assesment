@@ -52,10 +52,14 @@ export default function Form({ user, setUser, onSubmit, sectors, id }) {
           })
         }
       >
-        {sectors.map((sector) => (
-          <option key={sector.id} value={sector.name}>
-            {sector.name}
-          </option>
+        {sectors.map((parentSector) => (
+          <optgroup key={parentSector.id} label={`${parentSector.name}`}>
+            {parentSector.sectors?.map((childSector) => (
+              <option key={childSector.id} value={`${childSector.name}`}>
+                {childSector.name}
+              </option>
+            ))}
+          </optgroup>
         ))}
       </select>
       {errors.sectors?.message && !isValid && (
