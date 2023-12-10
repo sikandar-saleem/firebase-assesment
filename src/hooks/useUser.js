@@ -15,8 +15,12 @@ export default (id) => {
 
   useEffect(() => {
     (async () => {
-      const resp = await getDoc(userDoc);
-      setUser({ ...resp.data() });
+      try {
+        const resp = await getDoc(userDoc);
+        setUser({ ...resp.data() });
+      } catch (error) {
+        console.error("Error submitting form:", error);
+      }
     })();
   }, []);
 

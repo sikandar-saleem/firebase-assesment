@@ -9,8 +9,12 @@ export default () => {
 
   useEffect(() => {
     (async () => {
-      const response = await getDocs(usersDocs);
-      setUsers(response.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      try {
+        const response = await getDocs(usersDocs);
+        setUsers(response.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      } catch (error) {
+        console.error("Error submitting form:", error);
+      }
     })();
   }, []);
 

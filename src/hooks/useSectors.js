@@ -11,8 +11,12 @@ export default () => {
 
   useEffect(() => {
     (async () => {
-      const data = await getDocs(sectorsDocs);
-      setSectors(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      try {
+        const data = await getDocs(sectorsDocs);
+        setSectors(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      } catch (error) {
+        console.error("Error submitting form:", error);
+      }
     })();
   }, []);
 
